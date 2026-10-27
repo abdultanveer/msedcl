@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:msedcl/game.dart';
 
 void main() {
   runApp(const MyApp());
