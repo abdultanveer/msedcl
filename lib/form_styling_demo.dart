@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'Form title',
       home: Scaffold(
         appBar: AppBar(title: Text('text input'),),
-        body: const MyInputForm(),
+        body:  MyCustomForm(),
       ),
     );
   }
@@ -54,7 +54,7 @@ class _MyInputFormState extends State<MyInputForm> {
       appBar: AppBar(title: Text('input handling'),),
       body:      Column(
         children: [
-          TextField(controller: myController,)
+          TextField(controller: myController,autofocus: true,)
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -86,11 +86,18 @@ class _MyInputFormState extends State<MyInputForm> {
 
 
 class MyCustomForm extends StatelessWidget {
-  const MyCustomForm({super.key});
+   MyCustomForm({super.key});
+
+  
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Form(
+        key: _formKey,
+        child:
+      
+      Column(
 
     children: [
 
@@ -111,8 +118,31 @@ class MyCustomForm extends StatelessWidget {
           border: UnderlineInputBorder(),
           labelText: 'Enter your password'
       ),
-    )
-    ]
+    ),
+      TextFormField(
+        // The validator receives the text that the user has entered.
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter some text';
+          }
+          return null;
+        },
+      ),
+      ElevatedButton(
+        onPressed: () {
+          // Validate returns true if the form is valid, or false otherwise.
+          if (_formKey.currentState!.validate()) {
+            // If the form is valid, display a snackbar. In the real world,
+            // you'd often call a server or save the information in a database.
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Processing Data')),
+            );
+          }
+        },
+        child: const Text('Submit'),
+      )
+
+    ])
     );
   }
 }
