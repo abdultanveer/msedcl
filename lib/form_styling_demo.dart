@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'Form title',
       home: Scaffold(
         appBar: AppBar(title: Text('text input'),),
-        body: const MyInputForm(),
+        body: const MyCustomForm(),
       ),
     );
   }
@@ -79,6 +79,10 @@ class MyCustomForm extends StatelessWidget {
 
 
       TextField(
+        onChanged: (text){
+          print('First text field: $text (${text.characters.length})');
+        },
+
       decoration: const InputDecoration(
         border: UnderlineInputBorder(),
         labelText: 'Enter your name'
