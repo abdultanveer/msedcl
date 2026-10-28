@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'Form title',
       home: Scaffold(
         appBar: AppBar(title: Text('text input'),),
-        body: const MyCustomForm(),
+        body: const MyInputForm(),
       ),
     );
   }
@@ -27,9 +27,26 @@ class MyInputForm extends StatefulWidget {
   State<MyInputForm> createState() => _MyInputFormState();
 }
 
+
+
 class _MyInputFormState extends State<MyInputForm> {
  
   final TextEditingController myController = new TextEditingController();
+
+  void _printLatestValue() {
+    final text = myController.text;
+    print('Second text field: $text (${text.characters.length})');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Start listening to changes.
+    myController.addListener(_printLatestValue);
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
