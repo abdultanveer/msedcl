@@ -14,6 +14,6 @@ class MessageItem implements ListItem {
     @override
     Widget buildSubtitle(BuildContext context) => Text(body);
   }
-}
+
 
 
