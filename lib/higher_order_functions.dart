@@ -5,6 +5,9 @@ void calculate(int a, int b, int Function(int, int) operation) {
 }
 
 void main() {
+  int brake;
+  print(brake);
+
   // Passing a single-line lambda using arrow syntax
   calculate(5, 3, (x, y) => x + y);
 
